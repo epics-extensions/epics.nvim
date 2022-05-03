@@ -1,10 +1,10 @@
 # epics.nvim
 
-EPICS-related tools for NeoVim
+EPICS-related tools for Neovim
 
 ## Requirements
 
-NeoVim >= 0.7
+Neovim >= 0.7
 
 ## Usage
 
