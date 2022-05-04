@@ -15,18 +15,34 @@ function register_treesitter_grammars()
 		},
 	}
 
+	parser_config.epics_msi = {
+		install_info = {
+			url = "https://github.com/minijackson/tree-sitter-epics",
+			location = "tree-sitter-epics_msi/epics-msi",
+			files = { "src/parser.c" },
+		},
+	}
+
 	if M.options.ensure_ts_installed then
 		local ts_install = require "nvim-treesitter.install"
-		ts_install.ensure_installed { "epics_db" }
+		ts_install.ensure_installed { "epics_db", "epics_msi" }
 	end
 end
 
 function register_ftdetect()
 	vim.api.nvim_create_autocmd("BufReadPost", {
-		pattern = { "*.db", "*.template" },
+		pattern = { "*.db", "*.template", "*.vdb" },
 		desc = "set filetype=epics_db",
 		callback = function(opts)
 			vim.bo.filetype = "epics_db"
+		end,
+	})
+
+	vim.api.nvim_create_autocmd("BufReadPost", {
+		pattern = { "*.sub", "*.subs", "*.substitutions" },
+		desc = "set filetype=epics_msi",
+		callback = function(opts)
+			vim.bo.filetype = "epics_msi"
 		end,
 	})
 end
