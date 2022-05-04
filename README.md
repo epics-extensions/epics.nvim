@@ -6,6 +6,10 @@ EPICS-related tools for Neovim
 
 Neovim >= 0.7
 
+The [nvim-treesitter] plugin.
+
+[nvim-treesitter]: <https://github.com/nvim-treesitter/nvim-treesitter>
+
 ## Usage
 
 Add this plugin your preferred way.
