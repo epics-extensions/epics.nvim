@@ -4,7 +4,7 @@ M = {
 	},
 }
 
-function register_treesitter_grammars()
+local function register_treesitter_grammars()
 	local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
 
 	parser_config.epics_db = {
@@ -15,34 +15,42 @@ function register_treesitter_grammars()
 		},
 	}
 
-	parser_config.epics_msi = {
+	parser_config.epics_msi_substitution = {
 		install_info = {
 			url = "https://github.com/minijackson/tree-sitter-epics",
-			location = "tree-sitter-epics_msi/epics-msi",
+			location = "tree-sitter-epics_msi_substitution/epics-msi-substitution",
+			files = { "src/parser.c" },
+		},
+	}
+
+	parser_config.epics_msi_template = {
+		install_info = {
+			url = "https://github.com/minijackson/tree-sitter-epics",
+			location = "tree-sitter-epics_msi_template/epics-msi-template",
 			files = { "src/parser.c" },
 		},
 	}
 
 	if M.options.ensure_ts_installed then
 		local ts_install = require "nvim-treesitter.install"
-		ts_install.ensure_installed { "epics_db", "epics_msi" }
+		ts_install.ensure_installed { "epics_db", "epics_msi_substitution", "epics_msi_template" }
 	end
 end
 
-function register_ftdetect()
+local function register_ftdetect()
 	vim.api.nvim_create_autocmd("BufReadPost", {
 		pattern = { "*.db", "*.template", "*.vdb" },
 		desc = "set filetype=epics_db",
-		callback = function(opts)
+		callback = function()
 			vim.bo.filetype = "epics_db"
 		end,
 	})
 
 	vim.api.nvim_create_autocmd("BufReadPost", {
 		pattern = { "*.sub", "*.subs", "*.substitutions" },
-		desc = "set filetype=epics_msi",
-		callback = function(opts)
-			vim.bo.filetype = "epics_msi"
+		desc = "set filetype=epics_msi_substitution",
+		callback = function()
+			vim.bo.filetype = "epics_msi_substitution"
 		end,
 	})
 end

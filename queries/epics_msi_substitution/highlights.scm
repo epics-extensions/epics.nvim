@@ -7,8 +7,8 @@
 
 (comment) @comment
 
-[ "{" "}" ] @punctuation.bracket
-[ "," ] @punctuation.delimiter
+[ "${" "{" "}" "$(" ")" ] @punctuation.bracket
+"," @punctuation.delimiter
 "=" @punctuation.special
 
 [
