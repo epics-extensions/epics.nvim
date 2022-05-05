@@ -39,9 +39,23 @@ local function register_treesitter_grammars()
 		},
 	}
 
+	parser_config.streamdevice_proto = {
+		install_info = {
+			url = "https://github.com/minijackson/tree-sitter-epics",
+			location = "tree-sitter-streamdevice_proto/streamdevice-proto",
+			files = { "src/parser.c" },
+		},
+	}
+
 	if M.options.ensure_ts_installed then
 		local ts_install = require "nvim-treesitter.install"
-		ts_install.ensure_installed { "epics_cmd", "epics_db", "epics_msi_substitution", "epics_msi_template" }
+		ts_install.ensure_installed {
+			"epics_cmd",
+			"epics_db",
+			"epics_msi_substitution",
+			"epics_msi_template",
+			"streamdevice_proto",
+		}
 	end
 end
 
@@ -67,6 +81,21 @@ local function register_ftdetect()
 		desc = "set filetype=epics_msi_substitution",
 		callback = function()
 			vim.bo.filetype = "epics_msi_substitution"
+		end,
+	})
+
+	vim.api.nvim_create_autocmd("BufReadPost", {
+		pattern = { "*.proto" },
+		desc = "set filetype=streamdevice_proto",
+		callback = function()
+			-- Check if some lines are "#" comments
+			-- Because protobuf files are also named *.proto
+			for _, line in ipairs(vim.api.nvim_buf_get_lines(0, 0, -1, false)) do
+				if line:match "%s*#" then
+					vim.bo.filetype = "streamdevice_proto"
+					return
+				end
+			end
 		end,
 	})
 end
