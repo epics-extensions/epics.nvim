@@ -40,6 +40,9 @@
   "var"))
 
 (argument (word) @parameter)
+((argument (word) @number)
+  (#lua-match? @number "^[0-9]+$"))
+
 (path (word) @parameter)
 
 [ "(" ")" ] @punctuation.bracket
