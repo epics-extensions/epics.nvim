@@ -1,6 +1,6 @@
 [
- (source_file) 
-	(record)
+ (source_file)
+ (record)
 ] @scope
 
 (record name: (string) @definition.var)
