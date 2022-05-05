@@ -7,6 +7,14 @@ M = {
 local function register_treesitter_grammars()
 	local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
 
+	parser_config.epics_cmd = {
+		install_info = {
+			url = "https://github.com/minijackson/tree-sitter-epics",
+			location = "tree-sitter-epics_cmd/epics-cmd",
+			files = { "src/parser.c" },
+		},
+	}
+
 	parser_config.epics_db = {
 		install_info = {
 			url = "https://github.com/minijackson/tree-sitter-epics",
@@ -33,11 +41,19 @@ local function register_treesitter_grammars()
 
 	if M.options.ensure_ts_installed then
 		local ts_install = require "nvim-treesitter.install"
-		ts_install.ensure_installed { "epics_db", "epics_msi_substitution", "epics_msi_template" }
+		ts_install.ensure_installed { "epics_cmd", "epics_db", "epics_msi_substitution", "epics_msi_template" }
 	end
 end
 
 local function register_ftdetect()
+	vim.api.nvim_create_autocmd("BufReadPost", {
+		pattern = { "*.cmd" },
+		desc = "set filetype=epics_cmd",
+		callback = function()
+			vim.bo.filetype = "epics_cmd"
+		end,
+	})
+
 	vim.api.nvim_create_autocmd("BufReadPost", {
 		pattern = { "*.db", "*.template", "*.vdb" },
 		desc = "set filetype=epics_db",
