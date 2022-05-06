@@ -39,6 +39,14 @@ local function register_treesitter_grammars()
 		},
 	}
 
+	parser_config.snl = {
+		install_info = {
+			url = "https://github.com/minijackson/tree-sitter-epics",
+			location = "tree-sitter-snl/snl",
+			files = { "src/parser.c" },
+		},
+	}
+
 	parser_config.streamdevice_proto = {
 		install_info = {
 			url = "https://github.com/minijackson/tree-sitter-epics",
@@ -55,6 +63,7 @@ local function register_treesitter_grammars()
 			"epics_msi_substitution",
 			"epics_msi_template",
 			"streamdevice_proto",
+			"snl",
 		}
 	end
 end
@@ -81,6 +90,14 @@ local function register_ftdetect()
 		desc = "set filetype=epics_msi_substitution",
 		callback = function()
 			vim.bo.filetype = "epics_msi_substitution"
+		end,
+	})
+
+	vim.api.nvim_create_autocmd("BufReadPost", {
+		pattern = { "*.st", "*.stt" },
+		desc = "set filetype=snl",
+		callback = function()
+			vim.bo.filetype = "snl"
 		end,
 	})
 
