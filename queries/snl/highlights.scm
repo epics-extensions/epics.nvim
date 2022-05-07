@@ -151,6 +151,9 @@
 (param_decl
   (declarator (identifier) @parameter))
 
+((identifier) @parameter
+ (#has-ancestor? @parameter param_decl))
+
 (param_decl
   (declarator (pointer_declarator) @parameter))
 

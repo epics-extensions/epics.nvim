@@ -6,10 +6,8 @@
 
 (preproc_def
   name: (identifier) @definition.macro)
-(pointer_declarator
-  (identifier) @definition.var)
-(param_decl
-  (declarator (identifier) @definition.parameter))
+((identifier) @definition.parameter
+ (#has-ancestor? @definition.parameter param_decl))
 (init_declarator
   (declarator (identifier)) @definition.var)
 (array_declarator
