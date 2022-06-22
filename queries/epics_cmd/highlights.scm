@@ -35,6 +35,8 @@
 
   "pwd"
 
+  "system"
+
   "traceIocInit"
 
   "var"))
