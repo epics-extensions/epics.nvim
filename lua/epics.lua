@@ -10,7 +10,7 @@ local function register_treesitter_grammars()
 	parser_config.epics_cmd = {
 		install_info = {
 			url = "https://github.com/minijackson/tree-sitter-epics",
-			location = "tree-sitter-epics_cmd/epics-cmd",
+			location = "epics-cmd",
 			files = { "src/parser.c" },
 		},
 	}
@@ -18,7 +18,7 @@ local function register_treesitter_grammars()
 	parser_config.epics_db = {
 		install_info = {
 			url = "https://github.com/minijackson/tree-sitter-epics",
-			location = "tree-sitter-epics_db/epics-db",
+			location = "epics-db",
 			files = { "src/parser.c" },
 		},
 	}
@@ -26,7 +26,7 @@ local function register_treesitter_grammars()
 	parser_config.epics_msi_substitution = {
 		install_info = {
 			url = "https://github.com/minijackson/tree-sitter-epics",
-			location = "tree-sitter-epics_msi_substitution/epics-msi-substitution",
+			location = "epics-msi-substitution",
 			files = { "src/parser.c" },
 		},
 	}
@@ -34,7 +34,7 @@ local function register_treesitter_grammars()
 	parser_config.epics_msi_template = {
 		install_info = {
 			url = "https://github.com/minijackson/tree-sitter-epics",
-			location = "tree-sitter-epics_msi_template/epics-msi-template",
+			location = "epics-msi-template",
 			files = { "src/parser.c" },
 		},
 	}
@@ -42,7 +42,7 @@ local function register_treesitter_grammars()
 	parser_config.snl = {
 		install_info = {
 			url = "https://github.com/minijackson/tree-sitter-epics",
-			location = "tree-sitter-snl/snl",
+			location = "snl",
 			files = { "src/parser.c" },
 		},
 	}
@@ -50,7 +50,7 @@ local function register_treesitter_grammars()
 	parser_config.streamdevice_proto = {
 		install_info = {
 			url = "https://github.com/minijackson/tree-sitter-epics",
-			location = "tree-sitter-streamdevice_proto/streamdevice-proto",
+			location = "streamdevice-proto",
 			files = { "src/parser.c" },
 		},
 	}
