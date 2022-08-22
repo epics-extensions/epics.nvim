@@ -12,7 +12,7 @@
 (if_statement) @indent
 (else_statement) @indent
 (init_declarator) @indent
-(transition) @indent
+(transition condition: (_) @indent)
 
 [
   "else"
