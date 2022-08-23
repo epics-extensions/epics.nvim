@@ -99,6 +99,8 @@
  (string_literal)
  (system_lib_string)
 ] @string
+(parameter_expansion [ "{" "}" ] @string.special)
+(parameter_expansion (identifier) @constant)
 (escape_sequence) @string.escape
 
 (null) @constant.builtin
