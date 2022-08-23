@@ -1,24 +1,34 @@
 [
-  (preproc_arg)
-  (structdef)
-  (funcdef)
-  (while_statement)
-  (for_statement)
+  (field_declaration_list)
   (state_set)
   (state)
   (block)
+  (member_decl)
 ] @indent
-(if_statement condition: (_) @indent)
-(if_statement) @indent
-(else_statement) @indent
-(init_declarator) @indent
-(transition condition: (_) @indent)
+
+(block "}" @indent_end)
 
 [
   "else"
-  ")"
   "}"
 ] @branch
+
+(call_expression) @indent
+(call_expression ")" @indent_end)
+
+(if_statement condition: (_) @indent)
+
+((if_statement consequence: (_) @_consequence
+  (#not-has-type? @_consequence block)) @indent)
+((else_statement consequence: (_) @_consequence
+  (#not-has-type? @_consequence block)) @indent)
+((while_statement body: (statement (_) @_body)
+  (#not-has-type? @_body block)) @indent)
+((for_statement body: (statement (_) @_body)
+  (#not-has-type? @_body block)) @indent)
+
+(init_declarator) @indent
+(transition condition: (_) @indent)
 
 [
   "#define"
