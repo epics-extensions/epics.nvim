@@ -238,6 +238,7 @@
  "field"
  "device"
  "driver"
+ "link"
  "registrar"
  "function"
  "variable"
