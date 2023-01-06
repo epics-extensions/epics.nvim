@@ -82,6 +82,8 @@ local function register_ftdetect()
 		desc = "set filetype=epics_db",
 		callback = function()
 			vim.bo.filetype = "epics_db"
+			vim.bo.comments = ":#"
+			vim.bo.commentstring = "# %s"
 		end,
 	})
 
@@ -110,6 +112,8 @@ local function register_ftdetect()
 			for _, line in ipairs(vim.api.nvim_buf_get_lines(0, 0, -1, false)) do
 				if line:match "%s*#" then
 					vim.bo.filetype = "streamdevice_proto"
+					vim.bo.comments = ":#"
+					vim.bo.commentstring = "# %s"
 					return
 				end
 			end
