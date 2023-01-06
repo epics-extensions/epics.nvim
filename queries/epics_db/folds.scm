@@ -10,18 +10,5 @@
  (record_instance)
  (alias_statement)
 
- (menu_choice)
  (field_definition)
- (field_descriptor)
-
- (alias)
- (field)
- (info)
-] @indent
-
-[ "}" ")" ] @branch
-
-[
- (comment)
- (string)
-] @auto
+] @fold

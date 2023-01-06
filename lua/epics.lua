@@ -78,7 +78,7 @@ local function register_ftdetect()
 	})
 
 	vim.api.nvim_create_autocmd("BufReadPost", {
-		pattern = { "*.db", "*.template", "*.vdb" },
+		pattern = { "*.dbd", "*.db", "*.template", "*.vdb" },
 		desc = "set filetype=epics_db",
 		callback = function()
 			vim.bo.filetype = "epics_db"

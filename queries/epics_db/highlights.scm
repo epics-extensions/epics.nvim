@@ -1,4 +1,71 @@
-(source_file) @local.scope
+(string) @string
+((string) @float
+ ;; TODO: make this case insensitive somehow
+ (#match? @float "^[+-]?(([0-9]+([.][0-9]*)?|[.][0-9]+)(e[+-]?[0-9]+)?|0x[0-9a-f]+([.][0-9a-f]*)?(p[+-]?[0-9]+)?|inf(inity)?|nan)$"))
+(escape_sequence) @string.escape
+
+(record_name) @variable
+
+(menu_definition name: (_) @type.definition)
+(menu_choice name: (_) @constant)
+
+(record_type_definition name: (_) @type.definition)
+
+(field_definition name: (_) @field)
+
+(field_definition type: (_) @type)
+(field_definition type: (_) @type.builtin
+ (#any-of? @type.builtin
+  "DBF_STRING" "DBF_CHAR" "DBF_UCHAR" "DBF_SHORT" "DBF_USHORT" "DBF_LONG"
+  "DBF_ULONG" "DBF_FLOAT" "DBF_DOUBLE" "DBF_ENUM" "DBF_MENU" "DBF_DEVICE"
+  "DBF_INLINK" "DBF_OUTLINK" "DBF_FWDLINK" "DBF_NOACCESS"))
+
+((field_item) @function)
+((field_item) @function.builtin
+ (#any-of? @function.builtin
+  "asl" "initial" "promptgroup" "prompt" "special" "pp" "interest" "base"
+  "size" "extra" "menu" "prop"))
+
+(field_descriptor
+ (field_item) @_asl
+ value: (_) @constant.builtin
+ (#eq? @_asl "asl")
+ (#any-of? @constant.builtin
+  "ASL0" "ASL1"))
+
+(field_descriptor
+ (field_item) @_prompt
+ value: (string) @spell
+ (#any-of? @_asl "prompt" "promptgroup"))
+
+(field_descriptor
+ (field_item) @_special
+ value: (_) @constant.builtin
+ (#eq? @_special "special")
+ (#any-of? @constant.builtin
+  "SPC_MOD" "SPC_NOMOD" "SPC_DBADDR" "SPC_SCAN" "SPC_ALARMACK" "SPC_AS"
+  "SPC_RESET" "SPC_LINCONV" "SPC_CALC"))
+
+(field_descriptor
+ (field_item) @_pp
+ value: (_) @boolean
+ (#eq? @_pp "pp")
+ (#any-of? @boolean
+  "FALSE" "TRUE"))
+
+(field_descriptor
+ (field_item) @_base
+ value: (_) @constant.builtin
+ (#eq? @_base "base")
+ (#any-of? @constant.builtin
+  "DECIMAL" "HEX"))
+
+(field_descriptor
+ (field_item) @_prop
+ value: (_) @boolean
+ (#eq? @_prop "prop")
+ (#any-of? @boolean
+  "YES" "NO"))
 
 (record_type) @type
 ((record_type) @type.builtin
@@ -8,9 +75,22 @@
   "mbbiDirect" "mbbo" "mbboDirect" "permissive" "printf" "sel" "seq" "state"
   "stringin" "stringout" "lsi" "lso" "subArray" "sub" "waveform"))
 
-(field_type) @type
-((field_type) @type.builtin
- (#any-of? @type.builtin
+(device_support_declaration
+ link_type: (_) @constant.builtin
+ (#any-of? @constant.builtin
+  "CONSTANT" "PV_LINK" "VME_IO" "CAMAC_IO" "AB_IO" "GPIB_IO" "BITBUS_IO"
+  "INST_IO" "BBGPIB_IO" "RF_IO" "VXI_IO"))
+
+(variable_declaration name: (_) @variable)
+(variable_declaration type: (_) @type)
+
+(function_declaration name: (_) @function)
+
+(double) @float
+
+(field_name) @field
+((field_name) @field.builtin
+ (#any-of? @field.builtin
   "NAME" "DESC" "ASG" "SCAN" "PINI" "PHAS" "EVNT" "TSE" "TSEL" "DTYP" "DISV"
   "DISA" "SDIS" "MLOK" "MLIS" "DISP" "PROC" "STAT" "SEVR" "NSTA" "NSEV" "ACKS"
   "ACKT" "DISS" "LCNT" "PACT" "PUTF" "RPRO" "ASP" "PPN" "PPNR" "SPVT" "RSET"
@@ -133,15 +213,39 @@
   "ASCD" "PAUS" "LPAU" "PDLY" "DDLY" "RDLY" "FAZE" "ACQM" "ACQT" "DSTATE"
   "COPYTO"))
 
-(string) @string
-(escape_sequence) @string.escape
+(field
+ name: (_) @_field
+ value: (string) @variable
+ (#match? @_field "LNK|INP|^OUT$"))
+
+(field
+ name: (_) @_field
+ value: (string) @spell
+ (#match? @_field "DESC"))
 
 (comment) @comment
 
 [ "${" "{" "}" "$(" "(" ")" ] @punctuation.bracket
 [ "," ] @punctuation.delimiter
+[ "%" ] @punctuation.special
 
 [
- "record"
+ "path"
+ "addpath"
+ "menu"
+ "choice"
+ "recordtype"
  "field"
+ "device"
+ "driver"
+ "registrar"
+ "function"
+ "variable"
+ "breaktable"
+ "record"
+ "grecord"
+ "info"
+ "alias"
 ] @keyword
+
+"include" @include
