@@ -69,55 +69,32 @@ local function register_treesitter_grammars()
 end
 
 local function register_ftdetect()
-	vim.api.nvim_create_autocmd("BufReadPost", {
-		pattern = { "*.cmd" },
-		desc = "set filetype=epics_cmd",
-		callback = function()
-			vim.bo.filetype = "epics_cmd"
-		end,
-	})
+	vim.filetype.add({
+		extension = {
+			cmd = "epics_cmd",
 
-	vim.api.nvim_create_autocmd("BufReadPost", {
-		pattern = { "*.dbd", "*.db", "*.template", "*.vdb" },
-		desc = "set filetype=epics_db",
-		callback = function()
-			vim.bo.filetype = "epics_db"
-			vim.bo.comments = ":#"
-			vim.bo.commentstring = "# %s"
-		end,
-	})
+			db = "epics_db",
+			dbd = "epics_db",
+			template = "epics_db",
 
-	vim.api.nvim_create_autocmd("BufReadPost", {
-		pattern = { "*.sub", "*.subs", "*.substitutions" },
-		desc = "set filetype=epics_msi_substitution",
-		callback = function()
-			vim.bo.filetype = "epics_msi_substitution"
-		end,
-	})
+			sub = "epics_msi_substitution",
+			subs = "epics_msi_substitution",
+			substitutions = "epics_msi_substitution",
 
-	vim.api.nvim_create_autocmd("BufReadPost", {
-		pattern = { "*.st", "*.stt" },
-		desc = "set filetype=snl",
-		callback = function()
-			vim.bo.filetype = "snl"
-		end,
-	})
+			-- TODO: has collision
+			st = "snl",
+			stt = "snl",
 
-	vim.api.nvim_create_autocmd("BufReadPost", {
-		pattern = { "*.proto" },
-		desc = "set filetype=streamdevice_proto",
-		callback = function()
-			-- Check if some lines are "#" comments
-			-- Because protobuf files are also named *.proto
-			for _, line in ipairs(vim.api.nvim_buf_get_lines(0, 0, -1, false)) do
-				if line:match "%s*#" then
-					vim.bo.filetype = "streamdevice_proto"
-					vim.bo.comments = ":#"
-					vim.bo.commentstring = "# %s"
-					return
+			proto = function(_path, bufnr)
+				-- Check if some lines are "#" comments
+				-- Because protobuf files are also named *.proto
+				for _, line in ipairs(vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)) do
+					if line:match "%s*#" then
+						return "streamdevice_proto"
+					end
 				end
 			end
-		end,
+		}
 	})
 end
 
