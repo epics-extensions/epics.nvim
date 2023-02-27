@@ -7,9 +7,11 @@ M = {
 local function register_treesitter_grammars()
 	local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
 
+	local parser_repo = "https://github.com/epics-extensions/tree-sitter-epics"
+
 	parser_config.epics_cmd = {
 		install_info = {
-			url = "https://github.com/minijackson/tree-sitter-epics",
+			url = parser_repo,
 			location = "epics-cmd",
 			files = { "src/parser.c" },
 		},
@@ -17,7 +19,7 @@ local function register_treesitter_grammars()
 
 	parser_config.epics_db = {
 		install_info = {
-			url = "https://github.com/minijackson/tree-sitter-epics",
+			url = parser_repo,
 			location = "epics-db",
 			files = { "src/parser.c" },
 		},
@@ -25,7 +27,7 @@ local function register_treesitter_grammars()
 
 	parser_config.epics_msi_substitution = {
 		install_info = {
-			url = "https://github.com/minijackson/tree-sitter-epics",
+			url = parser_repo,
 			location = "epics-msi-substitution",
 			files = { "src/parser.c" },
 		},
@@ -33,7 +35,7 @@ local function register_treesitter_grammars()
 
 	parser_config.epics_msi_template = {
 		install_info = {
-			url = "https://github.com/minijackson/tree-sitter-epics",
+			url = parser_repo,
 			location = "epics-msi-template",
 			files = { "src/parser.c" },
 		},
@@ -41,7 +43,7 @@ local function register_treesitter_grammars()
 
 	parser_config.snl = {
 		install_info = {
-			url = "https://github.com/minijackson/tree-sitter-epics",
+			url = parser_repo,
 			location = "snl",
 			files = { "src/parser.c" },
 		},
@@ -49,7 +51,7 @@ local function register_treesitter_grammars()
 
 	parser_config.streamdevice_proto = {
 		install_info = {
-			url = "https://github.com/minijackson/tree-sitter-epics",
+			url = parser_repo,
 			location = "streamdevice-proto",
 			files = { "src/parser.c" },
 		},
