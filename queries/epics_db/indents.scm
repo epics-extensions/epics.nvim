@@ -17,11 +17,12 @@
  (alias)
  (field)
  (info)
-] @indent
+] @indent.begin
 
-[ "}" ")" ] @branch
+[ "{" "}" "(" ")" ] @indent.branch
+[ "}" ")" ] @indent.end
 
 [
  (comment)
  (string)
-] @auto
+] @indent.auto
