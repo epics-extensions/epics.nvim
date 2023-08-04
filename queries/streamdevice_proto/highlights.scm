@@ -20,10 +20,10 @@
   "mismatch" "writetimeout" "replytimeout" "readtimeout" "init"))
 
 [ "{" "}" "[" "]" "(" ")" "<" ">" "/" "#/" ] @punctuation.bracket
-[ "|" ";" ] @punctuation.delimiter
+[ "|" ";" "," ] @punctuation.delimiter
 [ "$" "\\$" "@" "%" ] @punctuation.special
 
-(string) @string
+(quoted_literal) @string
 (escape_sequence) @constant.builtin
 
 (format_converter) @string.special

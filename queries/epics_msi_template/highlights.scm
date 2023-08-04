@@ -5,3 +5,4 @@
 
 [ "${" "$(" "}" ")" ] @punctuation.bracket
 "=" @punctuation.special
+"," @punctuation.delimiter
