@@ -30,14 +30,13 @@
   "for"
   "continue"
   "break"
-] @repeat
+] @keyword.repeat
 
 [
  "if"
  "else"
-] @conditional
+] @keyword.conditional
 
-"#define" @constant.macro
 [
  "#elif"
  "#else"
@@ -47,8 +46,9 @@
  "#ifndef"
  (preproc_directive)
  (line_marker)
-] @keyword
-"#include" @include
+] @keyword.directive
+"#define" @keyword.directive.define
+"#include" @keyword.import
 
 [ "(" ")" "[" "]" "{" "}" "%%" "%{" "}%" ] @punctuation.bracket
 [ "." "," ";" ] @punctuation.delimiter
@@ -88,7 +88,7 @@
  "^="
  "|="
 ] @operator
-(conditional_expression [ "?" ":" ] @conditional)
+(conditional_expression [ "?" ":" ] @keyword.conditional)
 
 [
  (true)
@@ -109,10 +109,10 @@
  (char_literal)
 ] @number
 
-[
- (preproc_arg)
- (preproc_defined)
-]  @function.macro
+((preproc_arg) @function.macro
+  (#set! "priority" 90))
+
+(preproc_defined) @function.macro
 
 (call_expression
   function: (identifier) @function)
@@ -122,7 +122,7 @@
 (function_declarator
   declarator: (identifier) @function)
 (preproc_function_def
-  name: (identifier) @function.special)
+  name: (identifier) @function.macro)
 
 (field_expression
   field: (identifier) @property)
@@ -151,15 +151,15 @@
 (comment) @comment
 
 (param_decl
-  (declarator (identifier) @parameter))
+  (declarator (identifier) @variable.parameter))
 
-((identifier) @parameter
- (#has-ancestor? @parameter param_decl))
+((identifier) @variable.parameter
+ (#has-ancestor? @variable.parameter param_decl))
 
 (param_decl
-  (declarator (pointer_declarator) @parameter))
+  (declarator (pointer_declarator) @variable.parameter))
 
-(preproc_params (identifier) @parameter)
+(preproc_params (identifier) @variable.parameter)
 
 ((call_expression function: (_) @function.builtin)
   (#any-of? @function.builtin

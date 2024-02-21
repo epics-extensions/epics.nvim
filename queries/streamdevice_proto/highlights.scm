@@ -30,7 +30,7 @@
 (checksum_flag) @operator
 (checksum) @function
 
-(regex_pattern) @string.regex
+(regex_pattern) @string.regexp
 
 (time_conversion_spec) @constant.builtin
 

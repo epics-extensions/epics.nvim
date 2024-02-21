@@ -1,6 +1,7 @@
 (comment) @comment
 
 (string) @string
+(path) @string.special.path
 (escape_sequence) @string.escape
 (macro_expansion) @string.special
 
@@ -41,11 +42,11 @@
 
   "var"))
 
-(argument (word) @parameter)
+(argument (word) @variable.parameter)
 ((argument (word) @number)
   (#lua-match? @number "^[0-9]+$"))
 
-(path (word) @parameter)
+(path (word) @variable.parameter)
 
 [ "(" ")" ] @punctuation.bracket
 [ "," ] @punctuation.delimiter

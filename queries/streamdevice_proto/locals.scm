@@ -1,8 +1,8 @@
 [
  (source_file)
  (function)
-] @scope
+] @local.scope
 
-(assignment (variable_name) @definition.var)
+(assignment (variable_name) @local.definition.var)
 
-(variable_name) @reference
+(variable_name) @local.reference

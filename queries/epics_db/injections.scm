@@ -2,8 +2,7 @@
 (macro_expansion) @epics_msi_template
 (ccode) @c
 
-;; Not really JSON, but close
-(json_value) @json
+(json_value) @json5
 
 (field_descriptor
  (field_item) @_extra

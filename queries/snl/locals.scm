@@ -1,38 +1,38 @@
 ;; Functions definitions
 (function_declarator
-  declarator: (identifier) @definition.function)
+  declarator: (identifier) @local.definition.function)
 (preproc_function_def
-  name: (identifier) @definition.macro) @scope
+  name: (identifier) @local.definition.macro) @local.scope
 
 (preproc_def
-  name: (identifier) @definition.macro)
-((identifier) @definition.parameter
- (#has-ancestor? @definition.parameter param_decl))
+  name: (identifier) @local.definition.macro)
+((identifier) @local.definition.parameter
+ (#has-ancestor? @local.definition.parameter param_decl))
 (init_declarator
-  (declarator (identifier)) @definition.var)
+  (declarator (identifier)) @local.definition.var)
 (array_declarator
-  (identifier) @definition.var)
+  (identifier) @local.definition.var)
 
 ;; Struct
 (member_decl
-  (declarator (identifier)) @definition.field)
+  (declarator (identifier)) @local.definition.field)
 (structdef
-  name: (identifier) @definition.type)
+  name: (identifier) @local.definition.type)
 
 ;; References
-((field_expression field: (identifier) @reference)
+((field_expression field: (identifier) @local.reference)
  (set! reference.kind "field"))
-((call_expression function: (identifier) @reference)
+((call_expression function: (identifier) @local.reference)
  (set! reference.kind "call"))
-((basetype (identifier) @reference)
+((basetype (identifier) @local.reference)
  (set! reference.kind "type"))
 
 ;; SNL specific
-(state_set name: (identifier) @definition.state_set)
-(state name: (identifier) @definition)
-(transition name: (identifier) @reference)
+(state_set name: (identifier) @local.definition.state_set)
+(state name: (identifier) @local.definition)
+(transition name: (identifier) @local.reference)
 
-(identifier) @reference
+(identifier) @local.reference
 
 [
  (for_statement)
@@ -42,4 +42,4 @@
  (block)
  (state_set)
  (state_block)
-] @scope
+] @local.scope

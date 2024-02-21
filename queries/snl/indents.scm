@@ -4,31 +4,31 @@
   (state)
   (block)
   (member_decl)
-] @indent
+] @indent.begin
 
-(block "}" @indent_end)
+(block "}" @indent.end)
 
 [
   "else"
   "}"
-] @branch
+] @indent.branch
 
-(call_expression) @indent
-(call_expression ")" @indent_end)
+(call_expression) @indent.begin
+(call_expression ")" @indent.end)
 
-(if_statement condition: (_) @indent)
+(if_statement condition: (_) @indent.begin)
 
 ((if_statement consequence: (_) @_consequence
-  (#not-has-type? @_consequence block)) @indent)
+  (#not-has-type? @_consequence block)) @indent.begin)
 ((else_statement consequence: (_) @_consequence
-  (#not-has-type? @_consequence block)) @indent)
+  (#not-has-type? @_consequence block)) @indent.begin)
 ((while_statement body: (statement (_) @_body)
-  (#not-has-type? @_body block)) @indent)
+  (#not-has-type? @_body block)) @indent.begin)
 ((for_statement body: (statement (_) @_body)
-  (#not-has-type? @_body block)) @indent)
+  (#not-has-type? @_body block)) @indent.begin)
 
-(init_declarator) @indent
-(transition condition: (_) @indent)
+(init_declarator) @indent.begin
+(transition condition: (_) @indent.begin)
 
 [
   "#define"
@@ -36,11 +36,11 @@
   "#if"
   "#else"
   "#endif"
-] @zero_indent
+] @indent.zero
 
 [
   (preproc_arg)
   (string_literal)
-] @ignore
+] @indent.ignore
 
-(comment) @auto
+(comment) @indent.auto

@@ -1,7 +1,7 @@
 (string) @string
-((string) @float
+((string) @number.float
  ;; TODO: make this case insensitive somehow
- (#match? @float "^[+-]?(([0-9]+([.][0-9]*)?|[.][0-9]+)(e[+-]?[0-9]+)?|0x[0-9a-f]+([.][0-9a-f]*)?(p[+-]?[0-9]+)?|inf(inity)?|nan)$"))
+ (#match? @number.float "^[+-]?(([0-9]+([.][0-9]*)?|[.][0-9]+)(e[+-]?[0-9]+)?|0x[0-9a-f]+([.][0-9a-f]*)?(p[+-]?[0-9]+)?|inf(inity)?|nan)$"))
 (escape_sequence) @string.escape
 
 (record_name) @variable
@@ -11,7 +11,7 @@
 
 (record_type_definition name: (_) @type.definition)
 
-(field_definition name: (_) @field)
+(field_definition name: (_) @variable.member)
 
 (field_definition type: (_) @type)
 (field_definition type: (_) @type.builtin
@@ -86,11 +86,11 @@
 
 (function_declaration name: (_) @function)
 
-(double) @float
+(double) @number.float
 
-(field_name) @field
-((field_name) @field.builtin
- (#any-of? @field.builtin
+(field_name) @variable.member
+((field_name) @variable.builtin
+ (#any-of? @variable.builtin
   "NAME" "DESC" "ASG" "SCAN" "PINI" "PHAS" "EVNT" "TSE" "TSEL" "DTYP" "DISV"
   "DISA" "SDIS" "MLOK" "MLIS" "DISP" "PROC" "STAT" "SEVR" "NSTA" "NSEV" "ACKS"
   "ACKT" "DISS" "LCNT" "PACT" "PUTF" "RPRO" "ASP" "PPN" "PPNR" "SPVT" "RSET"

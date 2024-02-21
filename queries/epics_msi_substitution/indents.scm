@@ -3,13 +3,13 @@
  (pattern)
  (pattern_variables)
  (pattern_values)
-] @indent
+] @indent.begin
 
-(db_template (substitutions) @indent)
+(db_template (substitutions) @indent.begin)
 
-"}" @branch
+"}" @indent.branch
 
 [
  (comment)
  (string)
-] @auto
+] @indent.auto
