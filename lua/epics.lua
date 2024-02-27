@@ -127,7 +127,12 @@ function M.setup(opts)
 			[".*/configure/os/CONFIG.*"] = "make",
 			[".*/configure/CONFIG.*"] = "make",
 			[".*/configure/RULES.*"] = "make",
-			[".*/configure/RELEASE"] = "make",
+			[".*/configure/RELEASE.*"] = "make",
+			[".*/cfg/CONFIG.*"] = "make",
+			[".*/cfg/DIR_RULES.*"] = "make",
+			[".*/cfg/RULES.*"] = "make",
+			[".*/cfg/TOOLCHAIN.*"] = "make",
+			[".*/cfg/TOP_RULES.*"] = "make",
 		},
 	}
 	register_treesitter_grammars()
