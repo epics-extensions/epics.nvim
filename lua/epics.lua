@@ -95,24 +95,9 @@ local function register_ftdetect()
 						return "streamdevice_proto"
 					end
 				end
-			end
-		}
-	})
-end
+			end,
 
-function M.setup(opts)
-	vim.validate { opts = { opts, "table" } }
-
-	for given_key, _ in pairs(opts) do
-		if not M.options[given_key] then
-			error("Unsupported epics.nvim option: " .. given_key)
-		end
-	end
-
-	M.options = vim.tbl_extend("force", M.options, opts)
-
-	vim.filetype.add {
-		extension = {
+			-- for makefile
 			ioc = "make",
 			Db = "make",
 		},
@@ -134,7 +119,20 @@ function M.setup(opts)
 			[".*/cfg/TOOLCHAIN.*"] = "make",
 			[".*/cfg/TOP_RULES.*"] = "make",
 		},
-	}
+	})
+end
+
+function M.setup(opts)
+	vim.validate { opts = { opts, "table" } }
+
+	for given_key, _ in pairs(opts) do
+		if not M.options[given_key] then
+			error("Unsupported epics.nvim option: " .. given_key)
+		end
+	end
+
+	M.options = vim.tbl_extend("force", M.options, opts)
+
 	register_treesitter_grammars()
 	register_ftdetect()
 end
