@@ -111,6 +111,25 @@ function M.setup(opts)
 
 	M.options = vim.tbl_extend("force", M.options, opts)
 
+	vim.filetype.add {
+		extension = {
+			ioc = "make",
+			Db = "make",
+		},
+		filename = {
+			["RULES.Db"] = "make",
+			["RULES.ioc"] = "make",
+			["CONFIG_STIE"] = "make",
+			["CONFIG_STIE.local"] = "make",
+			["CONFIG_STIE_ENV"] = "make",
+		},
+		pattern = {
+			[".*/configure/os/CONFIG.*"] = "make",
+			[".*/configure/CONFIG.*"] = "make",
+			[".*/configure/RULES.*"] = "make",
+			[".*/configure/RELEASE"] = "make",
+		},
+	}
 	register_treesitter_grammars()
 	register_ftdetect()
 end
