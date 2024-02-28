@@ -104,9 +104,9 @@ local function register_ftdetect()
 		filename = {
 			["RULES.Db"] = "make",
 			["RULES.ioc"] = "make",
-			["CONFIG_STIE"] = "make",
-			["CONFIG_STIE.local"] = "make",
-			["CONFIG_STIE_ENV"] = "make",
+			["CONFIG_SITE"] = "make",
+			["CONFIG_SITE.local"] = "make",
+			["CONFIG_SITE_ENV"] = "make",
 		},
 		pattern = {
 			[".*/configure/os/CONFIG.*"] = "make",
