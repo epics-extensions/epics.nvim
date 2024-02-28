@@ -96,10 +96,6 @@ local function register_ftdetect()
 					end
 				end
 			end,
-
-			-- for makefile
-			ioc = "make",
-			Db = "make",
 		},
 		filename = {
 			["RULES.Db"] = "make",
