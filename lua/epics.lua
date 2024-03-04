@@ -95,8 +95,26 @@ local function register_ftdetect()
 						return "streamdevice_proto"
 					end
 				end
-			end
-		}
+			end,
+		},
+		filename = {
+			["RULES.Db"] = "make",
+			["RULES.ioc"] = "make",
+			["CONFIG_SITE"] = "make",
+			["CONFIG_SITE.local"] = "make",
+			["CONFIG_SITE_ENV"] = "make",
+		},
+		pattern = {
+			[".*/configure/os/CONFIG.*"] = "make",
+			[".*/configure/CONFIG.*"] = "make",
+			[".*/configure/RULES.*"] = "make",
+			[".*/configure/RELEASE.*"] = "make",
+			[".*/cfg/CONFIG.*"] = "make",
+			[".*/cfg/DIR_RULES.*"] = "make",
+			[".*/cfg/RULES.*"] = "make",
+			[".*/cfg/TOOLCHAIN.*"] = "make",
+			[".*/cfg/TOP_RULES.*"] = "make",
+		},
 	})
 end
 
