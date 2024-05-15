@@ -21,11 +21,11 @@
 
 ;; References
 ((field_expression field: (identifier) @local.reference)
- (set! reference.kind "field"))
+ (#set! reference.kind "field"))
 ((call_expression function: (identifier) @local.reference)
- (set! reference.kind "call"))
+ (#set! reference.kind "call"))
 ((basetype (identifier) @local.reference)
- (set! reference.kind "type"))
+ (#set! reference.kind "type"))
 
 ;; SNL specific
 (state_set name: (identifier) @local.definition.state_set)
